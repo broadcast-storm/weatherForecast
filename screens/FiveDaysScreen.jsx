@@ -45,7 +45,7 @@ const FiveDaysScreen = ({ city, changeCity }) => {
 
   return (
     <LinearGradient colors={['#C13B00', '#1B1D1E']} style={styles.linearGradient}>
-      <SafeAreaView style={isLoading ? styles.loadingContainer : null}>
+      <SafeAreaView style={isLoading || isError || isCityError ? styles.loadingContainer : null}>
         {isLoading ? (
           <ActivityIndicator size="large" color="#EC6E4C" />
         ) : isError ? (
