@@ -2,7 +2,8 @@ import React from 'react';
 import { TextInput, StyleSheet, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const SearchTown = () => {
+// eslint-disable-next-line react/prop-types
+const SearchTown = ({ changeCity }) => {
   const [value, onChangeText] = React.useState('');
 
   return (
@@ -13,7 +14,11 @@ const SearchTown = () => {
         onChangeText={(text) => onChangeText(text)}
         value={value}
       />
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => {
+          if (value.trim() !== '') changeCity(value.trim());
+        }}>
         <Icon name="cloud-search-outline" size={30} color={'#1B1D1E'} />
       </TouchableOpacity>
     </View>

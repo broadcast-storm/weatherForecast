@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 20,
     color: '#fff',
+    maxWidth: 200,
   },
   mainTemp: {
     fontSize: 60,
@@ -201,8 +202,8 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   imageContainer: {
-    width: 150,
-    height: 150,
+    width: 140,
+    height: 140,
     position: 'relative',
   },
   image: {

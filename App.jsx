@@ -1,5 +1,6 @@
+/* eslint-disable react/no-children-prop */
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,6 +10,7 @@ import FiveDaysScreen from './screens/FiveDaysScreen';
 const Tab = createBottomTabNavigator();
 
 const App = () => {
+  const [cityName, setCityName] = useState('Москва');
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -32,8 +34,16 @@ const App = () => {
             return <Icon name={iconName} size={35} color={color} />;
           },
         })}>
-        <Tab.Screen name="Today" component={TodayScreen} options={{ title: 'На сегодня' }} />
-        <Tab.Screen name="FiveDays" component={FiveDaysScreen} options={{ title: 'На 5 дней' }} />
+        <Tab.Screen
+          name="Today"
+          children={() => <TodayScreen city={cityName} changeCity={setCityName} />}
+          options={{ title: 'На сегодня' }}
+        />
+        <Tab.Screen
+          name="FiveDays"
+          children={() => <FiveDaysScreen city={cityName} changeCity={setCityName} />}
+          options={{ title: 'На 5 дней' }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
