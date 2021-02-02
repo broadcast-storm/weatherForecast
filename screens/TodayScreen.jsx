@@ -3,7 +3,13 @@ import React, { useEffect, useState } from 'react';
 import TodayWeather from '../components/TodayWeather';
 import Error from '../components/Error';
 import CityError from '../components/CityError';
-import { SafeAreaView, ActivityIndicator, StyleSheet } from 'react-native';
+import {
+  SafeAreaView,
+  ActivityIndicator,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import axios from 'axios';
 import LinearGradient from 'react-native-linear-gradient';
 import SearchTown from '../components/SearchTown';
@@ -51,24 +57,35 @@ const TodayScreen = ({ city, changeCity }) => {
   }, [city]);
 
   return (
-    <LinearGradient colors={['#C13B00', '#1B1D1E']} style={styles.linearGradient}>
-      <SafeAreaView style={isLoading || isError || isCityError ? styles.loadingContainer : null}>
-        {isLoading ? (
-          <ActivityIndicator size="large" color="#EC6E4C" />
-        ) : isError ? (
-          <Error />
-        ) : (
-          <>
-            <SearchTown changeCity={changeCity} />
-            {isCityError ? <CityError /> : <TodayWeather weatherInfo={forecast} />}
-          </>
-        )}
-      </SafeAreaView>
-    </LinearGradient>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+      style={styles.touchable}>
+      <LinearGradient colors={['#C13B00', '#1B1D1E']} style={styles.linearGradient}>
+        <SafeAreaView style={isLoading || isError || isCityError ? styles.loadingContainer : null}>
+          {isLoading ? (
+            <ActivityIndicator size="large" color="#EC6E4C" />
+          ) : isError ? (
+            <Error />
+          ) : (
+            <>
+              <SearchTown changeCity={changeCity} />
+              {isCityError ? <CityError /> : <TodayWeather weatherInfo={forecast} />}
+            </>
+          )}
+        </SafeAreaView>
+      </LinearGradient>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
+  touchable: {
+    flex: 1,
+    borderColor: 'red',
+    borderWidth: 3,
+  },
   linearGradient: {
     flex: 1,
   },
