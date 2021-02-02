@@ -77,6 +77,12 @@ import com.android.build.OutputFile
  * ]
  */
 
+project.ext.vectoricons = [
+    iconFontNames: [ 'MaterialIcons.ttf'] // Name of the font files you want to copy
+]
+
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
 project.ext.react = [
     enableHermes: false,  // clean and rebuild if changing
 ]
@@ -184,6 +190,8 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+
+    implementation project(':react-native-linear-gradient')
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 

@@ -1,27 +1,42 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import MainScreen from './screens/MainScreen';
-import DetailWeatherScreen from './screens/DetailWeatherScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import TodayScreen from './screens/TodayScreen';
+import FiveDaysScreen from './screens/FiveDaysScreen';
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Main" component={MainScreen} options={{ title: 'Welcome' }} />
-        <Stack.Screen name="DetailWeather" component={DetailWeatherScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator
+        tabBarOptions={{
+          activeTintColor: '#EC6E4C',
+          inactiveTintColor: '#fff',
+          style: {
+            backgroundColor: '#1B1D1E',
+            height: 60,
+          },
+        }}
+        screenOptions={({ route }) => ({
+          // eslint-disable-next-line react/display-name, react/prop-types
+          tabBarIcon: ({ color }) => {
+            let iconName;
+            if (route.name === 'Today') {
+              iconName = 'weather-partly-cloudy';
+            } else if (route.name === 'FiveDays') {
+              iconName = 'format-list-bulleted';
+            }
+            return <Icon name={iconName} size={35} color={color} />;
+          },
+        })}>
+        <Tab.Screen name="Today" component={TodayScreen} options={{ title: 'На сегодня' }} />
+        <Tab.Screen name="FiveDays" component={FiveDaysScreen} options={{ title: 'На 5 дней' }} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
-
-// const styles = StyleSheet.create({
-//   text: {
-//     color: '#000',
-//   },
-// });
 
 export default App;
