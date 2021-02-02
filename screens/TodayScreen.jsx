@@ -14,12 +14,6 @@ import axios from 'axios';
 import LinearGradient from 'react-native-linear-gradient';
 import SearchTown from '../components/SearchTown';
 
-// Прогноз на 5 дней
-// https://api.openweathermap.org/data/2.5/forecast?q=Moscow&lang=ru&units=metric&appid=132b73fb04b439ec404879180563287a
-
-// Погода сейчас
-// https://api.openweathermap.org/data/2.5/weather?q=Moscow&lang=ru&units=metric&appid=132b73fb04b439ec404879180563287a
-
 const TodayScreen = ({ city, changeCity }) => {
   const [forecast, setForecast] = useState(null);
   const [isLoading, setIsLoading] = useState(true);

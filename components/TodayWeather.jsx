@@ -5,7 +5,9 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 
 const TodayWeather = ({ weatherInfo }) => {
   const getTime = () => {
-    var date = new Date(weatherInfo.dt * 1000 + weatherInfo.timezone * 1000);
+    var currentDate = Date.now();
+    var date = new Date(currentDate + weatherInfo.timezone * 1000);
+    // var date = new Date(weatherInfo.dt * 1000 + weatherInfo.timezone * 1000);
     const day = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'][date.getDay()];
     var result =
       (date.getDate() < 10 ? '0' : '') +
@@ -61,7 +63,9 @@ const TodayWeather = ({ weatherInfo }) => {
             </Text>
             <Text style={styles.mainTemp}>{getTemp(weatherInfo.main.temp)}</Text>
             <View>
-              <Text style={styles.feelsLike}>Ощущается {getTemp(weatherInfo.main.feels_like)}</Text>
+              <Text style={styles.feelsLike}>
+                Ощущается как {getTemp(weatherInfo.main.feels_like)}
+              </Text>
             </View>
           </View>
           <View style={styles.imageContainer}>
@@ -100,7 +104,7 @@ const TodayWeather = ({ weatherInfo }) => {
             <View style={styles.infoRec}>
               <Icon name="altimeter" size={40} color={'#EC6E4C'} style={styles.infoIcon} />
               <Text style={styles.infoName}>Давление</Text>
-              <Text style={styles.infoResult}>{weatherInfo.main.pressure} мм</Text>
+              <Text style={styles.infoResult}>{weatherInfo.main.pressure - 270} мм</Text>
             </View>
             <View style={styles.infoRec}>
               <Icon name="water-percent" size={40} color={'#EC6E4C'} style={styles.infoIcon} />
